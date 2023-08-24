@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div>
+        <h3>To begin practice, choose the level.</h3>
+
+        <p>
+            Difficulty levels are based on grapheme-to-phoneme mappings. In a word like <em>bit</em>,
+            there is a 1-to-1 mapping between graphemes and phonemes (<em>bit</em> /bɪt/). This word would belong to Level 1.
+        </p>
+        <p>
+            In contrast, you will come across a word like <em>though</em> at higher levels since it contains 6 graphemes
+            but only 2 phonemes (/ðəʊ/).
+        </p>
+        <div class="levels">
+            <a href="{{ url_for('level_1') }}" style="text-decoration: none !important;"><button class="general" type="button">Level 1</button></a>
+            <a href="{{ url_for('level_2') }}" style="text-decoration: none !important;"><button class="general" type="button">Level 2</button></a>
+            <a href="{{ url_for('level_3') }}" style="text-decoration: none !important;"><button class="general" type="button">Level 3</button></a>
+        </div>
+    </div>
+
+{% endblock %}

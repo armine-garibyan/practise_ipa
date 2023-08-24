@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div>
+        <p id="title">Practise IPA!</p>
+        <img id="title_img" src="static/images/bubble.png">
+        <br>
+        <br>
+        <a href="{{ url_for('levels') }}" style="text-decoration: none !important;"><button class = "general" type="button">Start practice!</button></a>
+    </div>
+
+{% endblock %}
