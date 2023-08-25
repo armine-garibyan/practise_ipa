@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <br>
+    <div class="flexbox" style="z-index: 2;">
+        <div class="register">
+            <p style="text-align: center;"><b>Create an account</b></p>
+
+            <form action="/sign_register" method="post">
+                <table>
+                    <tr>
+                        <td>
+                            <b>Login</b>
+                        </td>
+                        <td>
+                            <input autocomplete="off" autofocus name="Login" placeholder="Login" type="text">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Enter a password</b><br><span style="font-size: 12px;">(4-12 alpanumeric characters)</span>
+                        </td>
+                        <td>
+                            <input id="userPassword"
+                                   type="password"
+                                   autocomplete="new-password"
+                                   required
+                                   minlength="4"
+                                   maxlength="12"
+                                   pattern="^[a-zA-Z0-9]+$"
+                            >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Repeat the password&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                        </td>
+                        <td>
+                            <input id="userPassword"
+                                   type="password"
+                                   autocomplete="new-password"
+                                   required
+                                   minlength="4"
+                                   maxlength="12"
+                                   pattern="^[a-zA-Z0-9]+$"
+                            >
+                        </td>
+                    </tr>
+                </table>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <br><button class="submit" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import pandas as pd
 
 app = Flask(__name__)
@@ -41,3 +41,17 @@ def level_2():
 @app.route("/level_3")
 def level_3():
     return render_template("level_3.html")
+
+@app.route("/sign_register", methods=['GET', 'POST'])
+def sign_register():
+    if request.method == 'GET':
+        return render_template("sign_register.html")
+    elif request.method =='POST':
+        # long_name = request.form['long_name']
+        # add to database
+        return render_template("registered.html")
+
+@app.route("/registered", methods=['GET'])
+def registered():
+    return render_template("registered.html")
+
