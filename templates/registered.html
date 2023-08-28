@@ -1,7 +1,16 @@
 {% extends "layout.html" %}
 
 {% block body %}
-
-    <h3>You've got registered successdully!</h3>
-
+    <br>
+    <div class="flexbox" style="z-index: 2;">
+        <div class="register">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="text-align: center; color: green;">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
 {% endblock %}

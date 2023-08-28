@@ -1,7 +1,21 @@
-from flask import Flask, render_template, request
+from flask import Flask, flash, redirect, render_template, request, url_for
+from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+db = SQLAlchemy(app)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'pbkdf2:sha256:600000$RCLZXo09ftX8KIA6$b0814c3175e5018c03bb7de6b0a6e73067f7fb673ec1f2d1803d6c23328bac57'
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(80), unique=True, nullable=False)
+
+db.create_all()
 
 @app.route("/")
 def index():
@@ -47,9 +61,28 @@ def sign_register():
     if request.method == 'GET':
         return render_template("sign_register.html")
     elif request.method =='POST':
-        # long_name = request.form['long_name']
-        # add to database
-        return render_template("registered.html")
+        username = request.form.get('username')
+        password = request.form.get('userPassword')
+        repeat_password = request.form.get('repeatPassword')
+        # check if 2 passwords are equal; use generate_password_hash(password)
+        if username:
+            if password == repeat_password:
+                # check if username already exists
+                if User.query.filter(User.username == username).first():
+                    flash('Choose a different username!', 'error')
+                    return redirect(url_for("sign_register"))
+                else:
+                    user = User(username=username, password_hash=generate_password_hash(password))
+                    db.session.add(user)
+                    db.session.commit()
+                    flash("You've registered successfully!", "info")
+                    return render_template("registered.html")
+            else:
+                flash("Passwords don't match!", "error")
+                return redirect(url_for("sign_register"))
+        else:
+            flash("Please provide a username!", "error")
+            return redirect(url_for("sign_register"))
 
 @app.route("/registered", methods=['GET'])
 def registered():

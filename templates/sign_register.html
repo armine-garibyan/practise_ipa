@@ -13,20 +13,20 @@
                             <b>Login</b>
                         </td>
                         <td>
-                            <input autocomplete="off" autofocus name="Login" placeholder="Login" type="text">
+                            <input autocomplete="off" autofocus name="username" id="login" placeholder="Login" required type="text">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <b>Enter a password</b><br><span style="font-size: 12px;">(4-12 alpanumeric characters)</span>
+                            <b>Enter a password</b><br><span style="font-size: 12px;">(minimum 8 alpanumeric characters)</span>
                         </td>
                         <td>
                             <input id="userPassword"
+                                   name="userPassword"
                                    type="password"
                                    autocomplete="new-password"
                                    required
-                                   minlength="4"
-                                   maxlength="12"
+                                   minlength="8"
                                    pattern="^[a-zA-Z0-9]+$"
                             >
                         </td>
@@ -36,12 +36,12 @@
                             <b>Repeat the password&nbsp;&nbsp;&nbsp;&nbsp;</b>
                         </td>
                         <td>
-                            <input id="userPassword"
+                            <input id="repeatPassword"
+                                   name="repeatPassword"
                                    type="password"
                                    autocomplete="new-password"
                                    required
-                                   minlength="4"
-                                   maxlength="12"
+                                   minlength="8"
                                    pattern="^[a-zA-Z0-9]+$"
                             >
                         </td>
@@ -50,6 +50,13 @@
                 <div style="text-align: center; margin-bottom: 20px;">
                     <br><button class="submit" type="submit">Submit</button>
                 </div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <span style="color: red;"><strong>Error: </strong>{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
             </form>
         </div>
     </div>
