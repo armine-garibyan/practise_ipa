@@ -1,4 +1,7 @@
-from flask import Flask, flash, redirect, render_template, request, url_for
+from datetime import datetime
+
+from flask import Flask, flash, g, redirect, render_template, request, url_for, session
+from flask_login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -18,12 +21,28 @@ db = SQLAlchemy(app)
 #app.config['SESSION_TYPE'] = 'filesystem'
 #Session(app)
 
+# login manager
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.login_message_category = "info"
 
-class User(db.Model):
+
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(80), unique=True, nullable=False)
+    joined_at = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
 
+    def get_id(self):
+        return str(self.id)
+
+    def is_active(self):
+        return self.is_active
+
+@login_manager.user_loader
+def load_user(id):
+    g.user = current_user
+    return User.query.get(int(id))
 
 with app.app_context():
     db.create_all()
@@ -101,3 +120,47 @@ def sign_register():
             flash("Please provide a username!", "error")
             return redirect(url_for("sign_register"))
 
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "GET":
+        return render_template('login.html')
+
+    elif request.method == 'POST':
+        username = request.form['username']
+        password = request.form['userPassword']
+        remember = request.form.get('remember') == 'on'
+
+        user = User.query.filter_by(username=username).first()
+        g.user = user
+        if user and check_password_hash(user.password_hash, password):
+            session['user_id'] = user.id
+            login_user(user, remember=remember)
+            flash("Logged in successfully!", "success")
+            return redirect(url_for('my_account'))
+        elif user:
+            flash("Invalid password.", "danger")
+            return redirect(url_for("login"))
+        else:
+            flash("User does not exist.", "danger")
+            return redirect(url_for("sign_register"))
+
+@app.route('/my_account', methods=['GET', 'POST'])
+def my_account():
+    if request.method == "GET":
+        if "user_id" in session:
+            # fetch user's data from db
+            user = User.query.get(session["user_id"])
+            return render_template("my_account.html", user=user.username)
+        else:
+            flash("Please log in to access your account.", "danger")
+            return redirect(url_for("login"))
+    elif request.method == "POST":
+        return redirect(url_for('login'))
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    session.pop('user_id', None)
+    flash('You have been logged out successfully.', 'info')
+    return redirect(url_for('login'))

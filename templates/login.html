@@ -4,9 +4,9 @@
     <br>
     <div class="flexbox" style="z-index: 2;">
         <div class="register">
-            <p style="text-align: center;"><b>Create an account</b></p>
+            <p style="text-align: center;"><b>Log in</b></p>
 
-            <form action="/sign_register" method="post">
+            <form action="/login" method="post">
                 <table>
                     <tr>
                         <td>
@@ -18,13 +18,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <b>Enter a password</b><br><span style="font-size: 12px;">(minimum 8 alpanumeric characters)</span>
+                            <b>Enter a password</b>
                         </td>
                         <td>
                             <input id="userPassword"
                                    name="userPassword"
                                    type="password"
                                    autocomplete="new-password"
+                                   placeholder="Password"
                                    required
                                    minlength="8"
                                    pattern="^[a-zA-Z0-9]+$"
@@ -33,22 +34,15 @@
                     </tr>
                     <tr>
                         <td>
-                            <b>Repeat the password&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                            Remember me
                         </td>
                         <td>
-                            <input id="repeatPassword"
-                                   name="repeatPassword"
-                                   type="password"
-                                   autocomplete="new-password"
-                                   required
-                                   minlength="8"
-                                   pattern="^[a-zA-Z0-9]+$"
-                            >
+                            <input type="checkbox" id="remember" name="remember">
                         </td>
                     </tr>
                 </table>
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <br><button class="submit" type="submit">Submit</button>
+                    <br><button class="submit" type="submit">Log in</button>
                 </div>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+Hello, {{ user }}!
+
+    <form action="/logout" method="post">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <br><button class="submit" type="submit">Log out</button>
+        </div>
+    </form>
+
+{% endblock %}
