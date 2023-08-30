@@ -6,7 +6,8 @@ config.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
 *$py.class
 
 # Django stuff:
