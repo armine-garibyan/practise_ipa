@@ -50,13 +50,6 @@
                 <div style="text-align: center; margin-bottom: 20px;">
                     <br><button class="submit" type="submit">Submit</button>
                 </div>
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            <span style="color: red;"><strong>Error: </strong>{{ message }}</span>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
             </form>
         </div>
     </div>

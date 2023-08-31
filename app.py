@@ -2,12 +2,14 @@ from datetime import datetime
 
 from flask import Flask, flash, g, redirect, render_template, request, url_for, session
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin
+from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # configure app
 app = Flask(__name__)
+app.debug = True
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -16,10 +18,14 @@ app.secret_key = 'pbkdf2:sha256:600000$RCLZXo09ftX8KIA6$b0814c3175e5018c03bb7de6
 
 db = SQLAlchemy(app)
 
-# configure session
-#app.config['SESSION_PERMANENT'] = False
-#app.config['SESSION_TYPE'] = 'filesystem'
-#Session(app)
+# Configure session extension
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_KEY_PREFIX'] = 'practise_ipa'
+
+# Initialize the session extension
+Session(app)
 
 # login manager
 login_manager = LoginManager(app)
@@ -33,19 +39,14 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(80), unique=True, nullable=False)
     joined_at = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
 
-    def get_id(self):
-        return str(self.id)
-
-    def is_active(self):
-        return self.is_active
 
 @login_manager.user_loader
 def load_user(id):
-    g.user = current_user
     return User.query.get(int(id))
 
 with app.app_context():
     db.create_all()
+
 
 
 @app.route("/")
@@ -111,7 +112,7 @@ def sign_register():
                         user = User(username=username, password_hash=generate_password_hash(password))
                         db.session.add(user)
                         db.session.commit()
-                        flash("You've registered successfully!", "info")
+                        flash("You've been registered successfully!")
                         return render_template('registered.html')
             else:
                 flash("Passwords don't match!", "error")
@@ -132,7 +133,7 @@ def login():
         remember = request.form.get('remember') == 'on'
 
         user = User.query.filter_by(username=username).first()
-        g.user = user
+
         if user and check_password_hash(user.password_hash, password):
             session['user_id'] = user.id
             login_user(user, remember=remember)
@@ -145,6 +146,7 @@ def login():
             flash("User does not exist.", "danger")
             return redirect(url_for("sign_register"))
 
+@login_required
 @app.route('/my_account', methods=['GET', 'POST'])
 def my_account():
     if request.method == "GET":
@@ -161,6 +163,6 @@ def my_account():
 @app.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
-    session.pop('user_id', None)
+    logout_user()
     flash('You have been logged out successfully.', 'info')
     return redirect(url_for('login'))
