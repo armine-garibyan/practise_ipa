@@ -1,0 +1,288 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h3 class="level_heading">Level 2</h3>
+    <a href="{{ url_for('level_1') }}">
+        <h4 style="text-align: left; font-size: 18px; color: #6E9C9F;"><i class="fa-solid fa-arrow-right fa-rotate-180 fa-lg"></i>&nbsp;<b>Go to Level 1</b></h4>
+    </a>
+
+    <p class="body_text">
+        Click 'Show the next word' to start practice. Then click the IPA symbols to transcribe the given word.
+        Once you've added all sounds, check your answer. If you want to change your input, click 'Reset the answer'
+        to start afresh. Click 'Show the next word' to proceed with the task. You can also get the correct answer
+        if you click 'Show correct answer'.
+    </p>
+    <div style="display: flex;">
+        <div style="width: 40%; padding: 20px;">
+            <table class="table">
+                <caption>RP phonemes with examples</caption>
+                <thead class="thead-dark">
+                    <tr>
+                        <td><span style="color: #008080;">Vowels</span></td>
+                        <td><span style="color: #008080;">Consonants</span></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {% for phoneme, example in sound_dict_vowels.items() %}
+                                {{ phoneme | safe }} {{ example | safe }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for phoneme, example in sound_dict_consonants.items() %}
+                                {{ phoneme | safe }} {{ example | safe }}<br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="padding: 20px; font-size: 16px;">
+            <button id="nextWord" type="button" style="border-radius: 12px;">Show the next word</button>&nbsp;&nbsp;&nbsp;
+            <input id="showWord" disabled value="">
+            <br>
+            <div style="padding-top: 2em;">
+                <b>Transcribe the word using IPA symbols:</b>
+                <table>
+                    <tr>
+                        <td>
+                            <input id="answer" value="">&nbsp;&nbsp;
+                            <button class="play-button"><i class="fas fa-play"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="reset" type="button" style="border-radius: 12px;">Reset the answer</button>
+                            <button class="check" type="button" style="border-radius: 12px;">Check your answer</button>
+                            <button class="show_correct" type="button" style="border-radius: 12px;">Show correct answer</button>
+                        </td>
+                    </tr>
+                </table>
+                <p id="feedback" style="padding-top: 2em;"></p>
+            </div>
+            <p style="padding-top: 2em;">
+                <b>Vowels</b>
+                <table>
+                    <tr>
+                        <td>
+                            <button class="symbol" type="button">i:</button>
+                            <button class="symbol" type="button">i</button>
+                            <button class="symbol" type="button">ɪ</button>
+                            <button class="symbol" type="button">ʊ</button>
+                            <button class="symbol" type="button">u:</button>
+                            <button class="symbol" type="button">e</button>
+                            <button class="symbol" type="button">ə</button>
+                            <button class="symbol" type="button">ɜ:</button>
+                            <button class="symbol" type="button">ɔ:</button>
+                            <button class="symbol" type="button">æ</button>
+                            <button class="symbol" type="button">ʌ</button>
+                            <button class="symbol" type="button">ɑ:</button>
+                            <button class="symbol" type="button">ɒ</button>
+                            <br>
+                            <button class="symbol" type="button">ɪə</button>
+                            <button class="symbol" type="button">eə</button>
+                            <button class="symbol" type="button">əʊ</button>
+                            <button class="symbol" type="button">aʊ</button>
+                            <button class="symbol" type="button">ʊe</button>
+                            <button class="symbol" type="button">eɪ</button>
+                            <button class="symbol" type="button">aɪ</button>
+                            <button class="symbol" type="button">ɔɪ</button>
+                        </td>
+                    </tr>
+                </table>
+            </p>
+            <p style="padding-top: 2em;">
+                <b>Consonants</b>
+                <table>
+                    <tr>
+                        <td>
+                            <button class="symbol" type="button">b</button>
+                            <button class="symbol" type="button">v</button>
+                            <button class="symbol" type="button">d</button>
+                            <button class="symbol" type="button">g</button>
+                            <button class="symbol" type="button">z</button>
+                            <button class="symbol" type="button">ð</button>
+                            <button class="symbol" type="button">ʒ</button>
+                            <button class="symbol" type="button">dʒ</button>
+                            <button class="symbol" type="button">h</button>
+                            <button class="symbol" type="button">m</button>
+                            <button class="symbol" type="button">n</button>
+                            <button class="symbol" type="button">ŋ</button>
+                            <button class="symbol" type="button">r</button>
+                            <button class="symbol" type="button">w</button>
+                            <button class="symbol" type="button">l</button>
+                            <button class="symbol" type="button">j</button>
+                            <br>
+                            <button class="symbol" type="button">p</button>
+                            <button class="symbol" type="button">f</button>
+                            <button class="symbol" type="button">t</button>
+                            <button class="symbol" type="button">k</button>
+                            <button class="symbol" type="button">s</button>
+                            <button class="symbol" type="button">θ</button>
+                            <button class="symbol" type="button">ʃ</button>
+                            <button class="symbol" type="button">tʃ</button>
+                        </td>
+                    </tr>
+                </table>
+            </p>
+            <p style="padding-top: 2em;">
+                <b>Stress</b>
+                <table>
+                    <tr>
+                        <td>
+                            <button class="symbol" type="button">ˈ</button>
+                            <button class="symbol" type="button">ˌ</button>
+                        </td>
+                    </tr>
+                </table>
+            </p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type='text/javascript'>
+        var words = JSON.parse('{{ words | tojson | safe }}');
+
+        // show random word on click
+        var randomIndex = 0;
+        var randomWord = "";
+
+        $(document).on('click', '#nextWord', function(){
+            // select random word
+            randomIndex = Math.floor(Math.random() * words.length);
+            randomWord = words[randomIndex];
+
+            // create an element for the new word; substitute
+            old_input = document.getElementById("showWord");
+            new_input = document.createElement("input");
+            new_input.setAttribute("id", "showWord");
+            new_input.setAttribute("value", randomWord);
+            new_input.setAttribute("disabled", "");
+            new_input.style.backgroundColor = "lightgreen";
+            new_input.style.textAlign = "center";
+
+            old_input.replaceWith(new_input);
+
+            // substitute old answer with empty field
+            empty = document.createElement("input");
+            empty.setAttribute("id", "answer");
+            empty.setAttribute("value", "");
+            empty.setAttribute("disabled", "");
+            document.getElementById("answer").replaceWith(empty);
+
+            // reset current answer
+            current_value = "";
+
+            // remove feedback
+            feedback = document.getElementById("feedback");
+            feedback.textContent = "";
+        });
+
+
+        // add IPA symbol to the current answer
+        var input_answer = document.getElementById("answer");
+        var current_value = input_answer.value;
+
+        $(document).on('click', '.symbol', function(){
+            // extract current answer
+            var buttonText = $(this).text();
+            current_value += buttonText;
+
+            // display the current answer
+            old_answer = document.getElementById("answer");
+            new_answer = document.createElement("input");
+            new_answer.setAttribute("id", "answer");
+            new_answer.setAttribute("value", current_value);
+            new_answer.setAttribute("disabled", "");
+            new_answer.style.textAlign = "center";
+
+            old_answer.replaceWith(new_answer);
+        });
+
+        // delete last symbol and update current_answer and its value
+        $(document).keypress(function(event) {
+            // Check if the pressed key's code is the one you want (e.g., Enter key with code 13)
+            if (event.key === "Delete") {
+                answer = document.getElementById("answer");
+                current_value = current_value.substring(0,  current_value.length - 1);
+                answer.setAttribute("value", current_value);
+            }
+        });
+
+        // check current answer
+        var transcriptions = JSON.parse('{{ transcriptions | tojson | safe }}');
+
+        $(document).on('click', '.check', function(){
+            wordTranscription = transcriptions[randomIndex];
+            var result = false;
+
+            // compare every symbol if lengths are equal
+            feedback = document.getElementById("feedback");
+
+            // define a function to perform check
+            function check(word, transcription) {
+                var correct = 0
+                if (word.length == transcription.length) {
+                    for (var i = 0; i < word.length; i++) {
+                        if (word[i] == transcription[i]) {
+                            correct += 1;
+                        }
+                    }
+                    if (correct == word.length) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+
+            if (wordTranscription.includes(", ")) {
+                var variants = wordTranscription.split(", ");
+                for (var i = 0; i < variants.length; i++) {
+                    if (check(current_value, variants[i])) {
+                        result = true;
+                        break;
+                    }
+                }
+            } else {
+                if (check(current_value, wordTranscription)) {
+                    result = true;
+                }
+            }
+
+            // add feedback
+            if (result == true) {
+                feedback.textContent = "Great job!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "Try again!";
+                feedback.style.color = "red";
+            }
+        });
+
+        // reset current answer
+        $(document).on('click', '.reset', function(){
+            answer = document.getElementById("answer");
+            answer.setAttribute("value", "");
+            current_value = "";
+        });
+
+        // show correct answer
+        $(document).on('click', '.show_correct', function(){
+            answer = document.getElementById("answer");
+            if (transcriptions[randomIndex].includes(", ")) {
+                var variants = transcriptions[randomIndex].split(", ");
+                answer.setAttribute("value", variants[0]);
+                current_value = variants[0];
+            } else {
+                answer.style.textAlign = "center";
+                answer.setAttribute("value", transcriptions[randomIndex]);
+                current_value = transcriptions[randomIndex];
+            }
+        });
+    </script>
+{% endblock %}

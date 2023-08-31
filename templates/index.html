@@ -2,11 +2,11 @@
 
 {% block body %}
     <div>
-        <p id="title">Practise IPA!</p>
+        <p id="title"><span style="color: #1E3050;">Practise</span> <span style="color: #EFB33F;">IPA!</span></p>
         <img id="title_img" src="static/images/bubble.png">
         <br>
         <br>
-        <a href="{{ url_for('levels') }}" style="text-decoration: none !important;"><button class = "general" type="button">Start practice!</button></a>
+        <a href="{{ url_for('levels') }}"><button class="general" type="button">Start practice!</button></a>
     </div>
 
 {% endblock %}

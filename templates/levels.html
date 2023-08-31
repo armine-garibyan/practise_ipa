@@ -2,20 +2,31 @@
 
 {% block body %}
     <div>
-        <p class="body_text" style="padding-top: 120px;">To begin practice, choose the level.</p>
+        <p class="body_text" style="padding-top: 120px;">
+            <span class="icon-box"><i class="fa-solid fa-stairs"></i></span>
+            &nbsp;To begin practice, choose the level.
+        </p>
 
         <p class="body_text">
             Difficulty levels are based on grapheme-to-phoneme mappings. In a word like <em>bit</em>,
             there is a 1-to-1 mapping between graphemes and phonemes (<em>bit</em> /bɪt/). This word would belong to Level 1.
+            In contrast, you will come across a word like <em>through</em> at Level 2 since it contains 7 graphemes
+            but only 3 phonemes (/θru:/).
         </p>
         <p class="body_text">
-            In contrast, you will come across a word like <em>though</em> at higher levels since it contains 6 graphemes
-            but only 2 phonemes (/ðəʊ/).
+            Word grouping by level does not account for stresses (primary or secondary), length symbols (:) or clusters of phonemes
+            (e.g., diphthongs or affricates).
         </p>
-        <div class="levels">
-            <a href="{{ url_for('level_1') }}" style="text-decoration: none !important;"><button class="general" type="button">Level 1</button></a>
-            <a href="{{ url_for('level_2') }}" style="text-decoration: none !important;"><button class="general" type="button">Level 2</button></a>
-            <a href="{{ url_for('level_3') }}" style="text-decoration: none !important;"><button class="general" type="button">Level 3</button></a>
+
+        <div class="container">
+          <a href="{{ url_for('level_1') }}" class="container-box">
+            <div class="upper-half">Level 1</div>
+            <div class="lower-half">1-to-1 mapping<br>e.g., big, dog, problem, May, lamp</div>
+          </a>
+          <a href="{{ url_for('level_2') }}" class="container-box">
+            <div class="upper-half">Level 2</div>
+            <div class="lower-half">less transparent mapping<br>e.g., youth, ice, psychology, write, station</div>
+          </a>
         </div>
     </div>
 

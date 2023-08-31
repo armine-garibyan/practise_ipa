@@ -59,6 +59,29 @@ def levels():
     return render_template("levels.html")
 
 
+# split words by level of difficulty
+phon_br = pd.read_csv("phon_br.csv", names=['word', 'transcription'], sep=";")
+def char_count(text):
+    length = 0
+    if ',' in str(text):
+        for char in text.split(",")[0]:
+            if char != "ˈ" and char != "ˌ" and char != ":":
+                length += 1
+        return length
+    else:
+        for char in text.split(",")[0]:
+            if char != "ˈ" and char != "ˌ" and char != ":":
+                length += 1
+        return length
+phon_br['numLetters'] = phon_br['word'].apply(char_count)
+phon_br['numPhonemes'] = phon_br['transcription'].apply(char_count)
+phon_br['difference'] = phon_br['numLetters'] - phon_br['numPhonemes']
+phon_br.to_csv('phon_br_with_charcount.csv', index=False)
+
+easy = phon_br[phon_br['difference'] == 0]
+hard = phon_br[(phon_br['difference'] < 0) | (phon_br['difference'] > 0)]
+
+
 @app.route("/level_1")
 def level_1():
     sounds = pd.read_csv("sounds.csv", names=['sounds', 'words', 'type'], sep=";")
@@ -70,10 +93,9 @@ def level_1():
     sound_dict_consonants = {phoneme: example for phoneme, example, type in zip(phonemes, examples, types)
                         if type == 'c'}
 
-    # store words of level 1
-    phon_br = pd.read_csv("phon_br.csv", names=['word', 'transcription', 'graphemes', 'phonemes', 'level'], sep=";")
-    words = phon_br['word'].tolist()
-    transcriptions = phon_br['transcription'].tolist()
+    # store words for level 1
+    words = easy['word'].tolist()
+    transcriptions = easy['transcription'].tolist()
 
     return render_template('level_1.html',
                            sound_dict_vowels=sound_dict_vowels,
@@ -84,12 +106,23 @@ def level_1():
 
 @app.route("/level_2")
 def level_2():
-    return render_template('level_2.html')
+    sounds = pd.read_csv("sounds.csv", names=['sounds', 'words', 'type'], sep=";")
+    phonemes = sounds['sounds'].tolist()
+    examples = sounds['words'].tolist()
+    types = sounds['type'].tolist()
+    sound_dict_vowels = {phoneme: example for phoneme, example, type in zip(phonemes, examples, types)
+                        if type == 'v'}
+    sound_dict_consonants = {phoneme: example for phoneme, example, type in zip(phonemes, examples, types)
+                        if type == 'c'}
 
-
-@app.route("/level_3")
-def level_3():
-    return render_template('level_3.html')
+    # store words for level 1
+    words = hard['word'].tolist()
+    transcriptions = hard['transcription'].tolist()
+    return render_template('level_2.html',
+                           sound_dict_vowels=sound_dict_vowels,
+                           sound_dict_consonants=sound_dict_consonants,
+                           transcriptions=transcriptions,
+                           words=words)
 
 
 @app.route("/sign_register", methods=['GET', 'POST'])
