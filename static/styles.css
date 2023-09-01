@@ -175,16 +175,9 @@ button.general-small:active {
     display: flex;
 }
 
-
 .sign_register {
     background-color: grey;
 }
-
-.submit {
-    border-radius: 12px;
-    width: 20%;
-}
-
 
 .level_heading {
     text-align: center;
@@ -214,4 +207,12 @@ button.general-small:active {
     align-items: center;
     min-height: min-content;
     overflow: hidden;
+}
+
+
+
+.danger {
+    color: red;
+    font-size: 16px;
+    text-align: center;
 }

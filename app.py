@@ -30,8 +30,8 @@ Session(app)
 # login manager
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
-login_manager.login_message_category = "info"
-
+login_manager.login_message = "Please log in to access your account."
+login_manager.login_message_category = "danger"
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -125,10 +125,10 @@ def level_2():
                            words=words)
 
 
-@app.route("/sign_register", methods=['GET', 'POST'])
-def sign_register():
+@app.route("/register", methods=['GET', 'POST'])
+def register():
     if request.method == 'GET':
-        return render_template('sign_register.html')
+        return render_template('register.html')
     elif request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('userPassword')
@@ -140,19 +140,18 @@ def sign_register():
                 with app.app_context():
                     if User.query.filter(User.username == username).first():
                         flash('Choose a different username!', 'error')
-                        return redirect(url_for("sign_register"))
+                        return redirect(url_for("register"))
                     else:
                         user = User(username=username, password_hash=generate_password_hash(password))
                         db.session.add(user)
                         db.session.commit()
-                        flash("You've been registered successfully!")
                         return render_template('registered.html')
             else:
                 flash("Passwords don't match!", "error")
-                return redirect(url_for("sign_register"))
+                return redirect(url_for("register"))
         else:
             flash("Please provide a username!", "error")
-            return redirect(url_for("sign_register"))
+            return redirect(url_for("register"))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -170,17 +169,17 @@ def login():
         if user and check_password_hash(user.password_hash, password):
             session['user_id'] = user.id
             login_user(user, remember=remember)
-            flash("Logged in successfully!", "success")
             return redirect(url_for('my_account'))
         elif user:
             flash("Invalid password.", "danger")
             return redirect(url_for("login"))
         else:
             flash("User does not exist.", "danger")
-            return redirect(url_for("sign_register"))
+            return redirect(url_for("register"))
 
-@login_required
+
 @app.route('/my_account', methods=['GET', 'POST'])
+@login_required
 def my_account():
     if request.method == "GET":
         if "user_id" in session:
@@ -188,7 +187,7 @@ def my_account():
             user = User.query.get(session["user_id"])
             return render_template("my_account.html", user=user.username)
         else:
-            flash("Please log in to access your account.", "danger")
+            flash("Please log in to access your account.")
             return redirect(url_for("login"))
     elif request.method == "POST":
         return redirect(url_for('login'))
@@ -197,5 +196,4 @@ def my_account():
 @login_required
 def logout():
     logout_user()
-    flash('You have been logged out successfully.', 'info')
     return redirect(url_for('login'))

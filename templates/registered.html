@@ -4,13 +4,7 @@
     <br>
     <div class="flexbox" style="z-index: 2;">
         <div class="register">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p style="text-align: center; color: green;">{{ message }}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+            <p style="text-align: center; color: green;">You've been registered successfully!</p>
         </div>
     </div>
 {% endblock %}
