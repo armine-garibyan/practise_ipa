@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h3 class="level_heading">Level 2</h3>
+    <h3 class="level_heading">Level <span class="icon-box"><i class="fa-solid fa-2"></i></span></h3>
     <a href="{{ url_for('level_1') }}">
         <h4 style="text-align: left; font-size: 18px; color: #6E9C9F;"><i class="fa-solid fa-arrow-right fa-rotate-180 fa-lg"></i>&nbsp;<b>Go to Level 1</b></h4>
     </a>
@@ -40,26 +40,20 @@
             </table>
         </div>
         <div style="padding: 20px; font-size: 16px;">
-            <button id="nextWord" type="button" style="border-radius: 12px;">Show the next word</button>&nbsp;&nbsp;&nbsp;
-            <input id="showWord" disabled value="">
-            <br>
+            <div class="same-line">
+                <button class="general-small" id="nextWord" type="button">Show the next word</button>&nbsp;&nbsp;&nbsp;
+                <input id="showWord" disabled value="">
+            </div>
             <div style="padding-top: 2em;">
-                <b>Transcribe the word using IPA symbols:</b>
-                <table>
-                    <tr>
-                        <td>
-                            <input id="answer" value="">&nbsp;&nbsp;
-                            <button class="play-button"><i class="fas fa-play"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="reset" type="button" style="border-radius: 12px;">Reset the answer</button>
-                            <button class="check" type="button" style="border-radius: 12px;">Check your answer</button>
-                            <button class="show_correct" type="button" style="border-radius: 12px;">Show correct answer</button>
-                        </td>
-                    </tr>
-                </table>
+                <b>Transcribe the word using IPA symbols:</b>&nbsp;&nbsp;&nbsp;
+                <input id="answer" value="">
+            </div>&nbsp;&nbsp;
+            <div class="same-line">
+                <button class="general-small" id="reset" type="button" style="border-radius: 12px;">Reset the answer</button> &nbsp;&nbsp;&nbsp;
+                <button class="general-small" id="check" type="button" style="border-radius: 12px;">Check your answer</button> &nbsp;&nbsp;&nbsp;
+                <button class="general-small" id="show_correct" type="button" style="border-radius: 12px;">Show correct answer</button>
+            </div>
+            <div>
                 <p id="feedback" style="padding-top: 2em;"></p>
             </div>
             <p style="padding-top: 2em;">
@@ -160,7 +154,10 @@
             new_input.setAttribute("id", "showWord");
             new_input.setAttribute("value", randomWord);
             new_input.setAttribute("disabled", "");
-            new_input.style.backgroundColor = "lightgreen";
+            //new_input.style.backgroundColor = "#EFB33F";
+            new_input.style.border = "2px solid #EFB33F";
+            new_input.style.fontSize = "18px";
+            new_input.style.fontWeight = "bold";
             new_input.style.textAlign = "center";
 
             old_input.replaceWith(new_input);
@@ -197,6 +194,9 @@
             new_answer.setAttribute("value", current_value);
             new_answer.setAttribute("disabled", "");
             new_answer.style.textAlign = "center";
+            new_answer.style.border = "2px solid cadetblue";
+            new_answer.style.height = "35px";
+            new_answer.style.fontSize = "18px";
 
             old_answer.replaceWith(new_answer);
         });
@@ -214,7 +214,7 @@
         // check current answer
         var transcriptions = JSON.parse('{{ transcriptions | tojson | safe }}');
 
-        $(document).on('click', '.check', function(){
+        $(document).on('click', '#check', function(){
             wordTranscription = transcriptions[randomIndex];
             var result = false;
 
@@ -265,14 +265,14 @@
         });
 
         // reset current answer
-        $(document).on('click', '.reset', function(){
+        $(document).on('click', '#reset', function(){
             answer = document.getElementById("answer");
             answer.setAttribute("value", "");
             current_value = "";
         });
 
         // show correct answer
-        $(document).on('click', '.show_correct', function(){
+        $(document).on('click', '#show_correct', function(){
             answer = document.getElementById("answer");
             if (transcriptions[randomIndex].includes(", ")) {
                 var variants = transcriptions[randomIndex].split(", ");

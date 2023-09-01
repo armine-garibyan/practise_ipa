@@ -84,20 +84,46 @@ button.general:hover {
 
 button.general:active {
   background-color: #1E3050;
+    color: white;
   box-shadow: 0 1px #1E3050;
   transform: translateY(4px);
 }
 
+button.general-small {
+    background-color: white;
+    padding: 3px 5px;
+    border-radius: 12px;
+    border: 2px solid #1E3050;
+    text-align: center;
+    display: block;
+    width: 200px;
+    transition-duration: 0.4s;
+    box-shadow: 0px 3px rgba(30, 48, 80, 1);
+    text-decoration: none;
+}
+
+button.general-small:hover {
+    background-color: #EFB33F;
+    color: white;
+    cursor: pointer;
+}
+
+button.general-small:active {
+  box-shadow: 0 1px #1E3050;
+  transform: translateY(4px);
+}
+
+
 .icon-box {
     display: inline-flex;
-    width: 50px; /* Adjust the width as needed */
-    height: 50px; /* Adjust the height as needed */
-    background-color: #EFB33F; /* Background color */
-    border-radius: 50%; /* Create a circular shape */
-    margin: 0 5px; /* Add some spacing around the icon */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* C
-    color: white; /* Icon color */
+    width: 50px;
+    height: 50px;
+    background-color: #EFB33F;
+    border-radius: 50%;
+    margin: 0 5px;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
 .container {
@@ -145,13 +171,13 @@ button.general:active {
     color: #B7D6CE;
 }
 
-
-
-
+.same-line {
+    display: flex;
+}
 
 
 .sign_register {
-    background-color: ;
+    background-color: grey;
 }
 
 .submit {
@@ -166,16 +192,9 @@ button.general:active {
     font-weight: bold;
 }
 
-.play-button {
-            font-size: 16px;
-            padding: 6px 18px;
-            border: none;
-            background-color: cadetblue;
-            color: #ffffff;
-            border-radius: 25%;
-            transition-duration: 0.4s;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        }
+#answer {
+    height: 35px;
+}
 
 .register {
     padding: 50px 50px;
