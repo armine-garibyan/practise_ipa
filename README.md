@@ -2,12 +2,12 @@
 #### Video Demo:  <URL HERE>
 #### Description:
 
-*Practise IPA* is aimed at first year students majoring in English. It does not attempt to cover Engilsh varieties comprehensively, but only serves to provide IPA practice as the name suggests.
+*Practise IPA* is aimed at first year students majoring in English. It does not attempt to cover English varieties comprehensively, but only serves to provide IPA practice as the name suggests.
 
 #### Features:
 
 - **Progressive Difficulty Levels**: *Practise IPA* offers three distinct levels of difficulty. Choose between Levels 1 and 2, each presenting varying degrees of mismatch between phonemes and graphemes.
-- **Large Word Database**: Practice with real and relevant vocabulary. *Practise IPA* generates random words based on your selected difficulty level, providing you with a diverse range of transcription challenges. At the moment, the database include 5000 most frequent words from the *BNC*.
+- **Large Word Database**: Practice with real and relevant vocabulary. *Practise IPA* generates random words based on your selected difficulty level, providing you with a diverse range of transcription challenges. At the moment, the database includes 5000 most frequent words from the *BNC*.
 - **Instant Feedback**: After submitting your transcription attempt, *Practise IPA* provides instant feedback. It assesses the accuracy of your transcription and offers the correct IPA representation, helping you learn from your mistakes.
 - **British English Support** (with More to Come): Currently, *Practise IPA* focuses on British English RP phonemes, with target transcriptions based on the *OALD*. In the future, an American English interface will be added.
 

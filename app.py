@@ -58,6 +58,9 @@ def index():
 def levels():
     return render_template("levels.html")
 
+@app.route('/about')
+def about():
+    return render_template("about.html")
 
 # split words by level of difficulty
 phon_br = pd.read_csv("phon_br.csv", names=['word', 'transcription'], sep=";")
