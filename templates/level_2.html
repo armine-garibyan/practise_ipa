@@ -255,12 +255,33 @@
             }
 
             // add feedback
+            var user_info = "{{ user }}";
+
             if (result == true) {
                 feedback.textContent = "Great job!";
                 feedback.style.color = "green";
+
+                if ((user_info != null)){
+                    // Send AJAX request to update the database
+                    $.ajax({
+                        type: 'POST',
+                        url: '/level_2',
+                        data: {correct_point: 1},
+                    });
+                    console.log('success');
+                }
             } else {
                 feedback.textContent = "Try again!";
                 feedback.style.color = "red";
+
+                if ((user_info != null)){
+                    // Send AJAX request to update the database
+                    $.ajax({
+                        type: 'POST',
+                        url: '/level_2',
+                        data: {incorrect_point: 1},
+                    });
+                }
             }
         });
 

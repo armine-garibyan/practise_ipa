@@ -4,9 +4,91 @@
 
 <h3 style="padding-top: 100px;">Hello, {{ user }}!</h3>
 
+
+    <h3 class="level_heading" style="padding-top: 50px !important;">Level <span class="icon-box"><i class="fa-solid fa-1"></i></span></h3>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr style="text-align: center;">
+                <td style="width: 33%;"><span style="color: #008080;">Correct</span></td>
+                <td style="width: 33%;"><span style="color: #008080;">Incorrect</span></td>
+                <td style="width: 33%;"><span style="color: #008080;">Current progress</span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="text-align: center;">
+                <td>
+                    {{ correct_1 }}
+                </td>
+                <td>
+                    {{ incorrect_1 }}
+                </td>
+                <td id="result_1">
+                    <script>
+                        var correct_1 = parseInt("{{ correct_1 }}", 10);
+                        var incorrect_1 = parseInt("{{ incorrect_1 }}", 10);
+
+                        var result_1 = 0;
+                        if (correct_1+incorrect_1 == 0){
+                            result_1 = 0;
+                        } else if (incorrect_1 == 0 && correct_1 > 0){
+                            result_1 = 100;
+                        } else {
+                            var result_1 = correct_1 / (correct_1 + incorrect_1) * 100;
+                        }
+
+                        var resultField_1 = document.getElementById('result_1');
+                        resultField_1.innerHTML = result_1.toFixed(1) + '%';
+                    </script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="level_heading" style="padding-top: 50px !important;">Level <span class="icon-box"><i class="fa-solid fa-2"></i></span></h3>
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr style="text-align: center;">
+                <td style="width: 33%;"><span style="color: #008080;">Correct</span></td>
+                <td style="width: 33%;"><span style="color: #008080;">Incorrect</span></td>
+                <td style="width: 33%;"><span style="color: #008080;">Current progress</span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="text-align: center;">
+                <td>
+                    {{ correct_2 }}
+                </td>
+                <td>
+                    {{ incorrect_2 }}
+                </td>
+                <td id="result_2">
+                    <script>
+                        var correct_2 = parseInt("{{ correct_2 }}", 10);
+                        var incorrect_2 = parseInt("{{ incorrect_2 }}", 10);
+
+                        var result_2 = 0;
+                        if (correct_2+incorrect_2 == 0){
+                            result_2 = 0;
+                        } else if (incorrect_2 == 0 && correct_2 > 0){
+                            result_2 = 100;
+                        } else {
+                            var result_2 = correct_2 / (correct_2 + incorrect_2) * 100;
+                        }
+
+                        var resultField_2 = document.getElementById('result_2');
+                        resultField_2.innerHTML = result_2.toFixed(1) + '%';
+                    </script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
     <form action="/logout" method="post">
         <div style="text-align: center; margin-bottom: 20px;">
-            <br><button class="general-small" type="submit">Log out</button>
+            <br><button class="general" type="submit">Log out</button>
         </div>
     </form>
 

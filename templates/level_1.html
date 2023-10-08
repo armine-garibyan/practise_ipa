@@ -15,7 +15,7 @@
     </p>
     <div style="display: flex;">
         <div style="width: 40%; padding: 20px;">
-            <table class="table">
+            <table class="table" style="margin: auto !important;">
                 <caption>RP phonemes with examples</caption>
                 <thead class="thead-dark">
                     <tr>
@@ -255,12 +255,33 @@
             }
 
             // add feedback
+            var user_info = "{{ user }}";
+
             if (result == true) {
                 feedback.textContent = "Great job!";
                 feedback.style.color = "green";
+
+                if ((user_info != null)){
+                    // Send AJAX request to update the database
+                    $.ajax({
+                        type: 'POST',
+                        url: '/level_1',
+                        data: {correct_point: 1},
+                    });
+                    console.log('success');
+                }
             } else {
                 feedback.textContent = "Try again!";
                 feedback.style.color = "red";
+
+                if ((user_info != null)){
+                    // Send AJAX request to update the database
+                    $.ajax({
+                        type: 'POST',
+                        url: '/level_1',
+                        data: {incorrect_point: 1},
+                    });
+                }
             }
         });
 
