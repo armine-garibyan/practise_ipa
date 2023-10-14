@@ -116,7 +116,7 @@
                             <button class="symbol" type="button">s</button>
                             <button class="symbol" type="button">θ</button>
                             <button class="symbol" type="button">ʃ</button>
-                            <button class="symbol" type="button">tʃ</button>
+                            <button class="symbol" type="button">ʧ</button>
                         </td>
                     </tr>
                 </table>
@@ -153,8 +153,6 @@
             new_input = document.createElement("input");
             new_input.setAttribute("id", "showWord");
             new_input.setAttribute("value", randomWord);
-            new_input.setAttribute("disabled", "");
-            //new_input.style.backgroundColor = "#EFB33F";
             new_input.style.border = "2px solid #EFB33F";
             new_input.style.fontSize = "18px";
             new_input.style.fontWeight = "bold";
@@ -166,7 +164,7 @@
             empty = document.createElement("input");
             empty.setAttribute("id", "answer");
             empty.setAttribute("value", "");
-            empty.setAttribute("disabled", "");
+
             document.getElementById("answer").replaceWith(empty);
 
             // reset current answer
@@ -179,12 +177,11 @@
 
 
         // add IPA symbol to the current answer
-        var input_answer = document.getElementById("answer");
-        var current_value = input_answer.value;
-
         $(document).on('click', '.symbol', function(){
             // extract current answer
             var buttonText = $(this).text();
+            var input_answer = document.getElementById("answer");
+            var current_value = input_answer.value;
             current_value += buttonText;
 
             // display the current answer
@@ -192,23 +189,12 @@
             new_answer = document.createElement("input");
             new_answer.setAttribute("id", "answer");
             new_answer.setAttribute("value", current_value);
-            new_answer.setAttribute("disabled", "");
             new_answer.style.textAlign = "center";
             new_answer.style.border = "2px solid cadetblue";
             new_answer.style.height = "35px";
             new_answer.style.fontSize = "18px";
 
             old_answer.replaceWith(new_answer);
-        });
-
-        // delete last symbol and update current_answer and its value
-        $(document).keypress(function(event) {
-            // Check if the pressed key's code is the one you want (e.g., Enter key with code 13)
-            if (event.key === "Delete") {
-                answer = document.getElementById("answer");
-                current_value = current_value.substring(0,  current_value.length - 1);
-                answer.setAttribute("value", current_value);
-            }
         });
 
         // check current answer
@@ -239,6 +225,10 @@
                     return false;
                 }
             }
+
+            // to get the upated value after possible Delete presses
+            var input_answer = document.getElementById("answer");
+            var current_value = input_answer.value;
 
             if (wordTranscription.includes(", ")) {
                 var variants = wordTranscription.split(", ");
