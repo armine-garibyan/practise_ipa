@@ -20,6 +20,9 @@ db.sqlite3-journal
 instance/
 .webassets-cache
 
+# Flask session files
+sessions/
+
 # pyenv
 .python-version
 .pyvenv.cfg
