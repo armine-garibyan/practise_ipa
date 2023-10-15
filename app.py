@@ -13,8 +13,7 @@ app.debug = True
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.secret_key = 'pbkdf2:sha256:600000$RCLZXo09ftX8KIA6$b0814c3175e5018c03bb7de6b0' \
-                 'a6e73067f7fb673ec1f2d1803d6c23328bac57'
+
 
 db = SQLAlchemy(app)
 
