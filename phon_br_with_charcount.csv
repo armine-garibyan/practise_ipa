@@ -683,7 +683,7 @@ tree,tri:,4,3,1
 news,nju:z,4,4,0
 hair,heə,4,3,1
 ensure,"ɪnˈʃʊə, ɪnˈʃɔ:",6,5,1
-region,ˈriːdʒən,6,7,-1
+region,ˈri:dʒən,6,6,0
 fire,ˈfaɪə,4,4,0
 catch,kætʃ,5,4,1
 natural,ˈnætʃrəl,7,7,0
@@ -714,7 +714,7 @@ hotel,həʊˈtel,5,6,-1
 sea,si:,3,2,1
 nine,naɪn,4,4,0
 thought,θɔ:t,7,3,4
-organisation,ˌɔːɡənaɪˈzeɪʃn,12,12,0
+organisation,ˌɔ:ɡənaɪˈzeɪʃn,12,11,1
 relate,rɪˈleɪt,6,6,0
 feature,ˈfi:tʃə,7,5,2
 current,ˈkʌrənt,7,6,1
@@ -836,7 +836,7 @@ throughout,θru:ˈaʊt,10,6,4
 united,juˈnaɪtɪd,6,8,-2
 industrial,ɪnˈdʌstriəl,10,10,0
 customer,ˈkʌstəmə,8,7,1
-institution,ˌɪnstɪˈtjuːʃn,11,11,0
+institution,ˌɪnstɪˈtju:ʃn,11,10,1
 remove,rɪˈmu:v,6,5,1
 profit,ˈprɒfɪt,6,6,0
 summer,ˈsʌmə,6,4,2
@@ -941,12 +941,12 @@ thousand,ˈθaʊznd,8,6,2
 variety,vəˈraɪəti,7,8,-1
 beyond,bɪˈjɒnd,6,6,0
 heavy,ˈhevi,5,4,1
-advantage,ədˈvɑːntɪdʒ,9,10,-1
+advantage,ədˈvɑ:ntɪdʒ,9,9,0
 culture,ˈkʌltʃə,7,6,1
 january,ˈdʒænjuəri,7,9,-2
 push,pʊʃ,4,3,1
 competition,ˌkɒmpəˈtɪʃn,11,9,2
-parliament,ˈpɑːləmənt,10,9,1
+parliament,ˈpɑ:ləmənt,10,8,2
 goods,gʊdz,5,4,1
 maybe,ˈmeɪbi,5,5,0
 enable,ɪˈneɪbl,6,6,0

@@ -27,3 +27,8 @@ flask-session/
 .python-version
 .pyvenv.cfg
 
+# Exclude virtual environment
+venv/
+
+# Exclude JetBrains IDE files
+.idea/

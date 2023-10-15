@@ -3,4 +3,4 @@ flask_login
 flask_session
 flask_sqlalchemy
 pandas
-werkzeug
+Werkzeug==2.3.0
