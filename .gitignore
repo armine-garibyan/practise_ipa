@@ -21,7 +21,7 @@ instance/
 .webassets-cache
 
 # Flask session files
-sessions/
+flask-sessions/
 
 # pyenv
 .python-version
