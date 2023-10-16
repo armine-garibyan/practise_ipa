@@ -30,5 +30,8 @@ flask-session/
 # Exclude virtual environment
 venv/
 
+# Exclude environment variables
+.env
+
 # Exclude JetBrains IDE files
 .idea/

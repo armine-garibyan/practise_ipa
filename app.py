@@ -1,11 +1,15 @@
 from datetime import datetime
 
+from dotenv import load_dotenv
 from flask import Flask, flash, g, redirect, render_template, request, url_for, session
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+import os
 import pandas as pd
 from werkzeug.security import generate_password_hash, check_password_hash
+
+load_dotenv()
 
 # configure app
 app = Flask(__name__)
@@ -13,7 +17,7 @@ app.debug = True
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 db = SQLAlchemy(app)
 
