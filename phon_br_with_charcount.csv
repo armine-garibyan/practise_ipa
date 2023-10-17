@@ -25,7 +25,7 @@ but,"bət, bʌt",3,3,0
 from,"frəm, frɒm",4,4,0
 as,"əz, æz",2,2,0
 or,ɔ:,2,1,1
-which,wɪʧ,5,3,2
+which,wɪtʃ,5,4,1
 an,"ən, æn",2,2,0
 will,wɪl,4,3,1
 say,seɪ,3,3,0
@@ -101,7 +101,7 @@ tell,tel,4,3,1
 last,lɑ:st,4,4,0
 through,θru:,7,3,4
 must,"məst, mʌst",4,4,0
-child,ʧaɪld,5,5,0
+child,tʃaɪld,5,6,-1
 still,stɪl,5,4,1
 here,hɪə,4,3,1
 put,pʊt,3,3,0
@@ -121,7 +121,7 @@ leave,li:v,5,3,2
 system,ˈsɪstəm,6,6,0
 same,seɪm,4,4,0
 where,weə,5,3,2
-each,i:ʧ,4,2,2
+each,i:tʃ,4,3,1
 group,gru:p,5,4,1
 woman,ˈwʊmən,5,5,0
 number,ˈnʌmbə,6,5,1
@@ -151,7 +151,7 @@ place,pleɪs,5,5,0
 party,ˈpɑ:ti,5,4,1
 call,kɔ:l,4,3,1
 school,sku:l,6,4,2
-much,mʌʧ,4,3,1
+much,mʌtʃ,4,4,0
 provide,prəˈvaɪd,7,7,0
 small,smɔ:l,5,4,1
 hand,hænd,4,4,0
@@ -212,7 +212,7 @@ home,həʊm,4,4,0
 question,ˈkwestʃən,8,8,0
 head,hed,4,3,1
 power,ˈpaʊə,5,4,1
-change,ʧeɪnʤ,6,5,1
+change,tʃeɪnʤ,6,6,0
 move,mu:v,4,3,1
 play,pleɪ,4,4,0
 night,naɪt,5,4,1
@@ -339,7 +339,7 @@ fall,fɔ:l,4,3,1
 remain,rɪˈmeɪn,6,6,0
 position,pəˈzɪʃn,8,6,2
 matter,ˈmætə,6,4,2
-education,ˌeʤuˈkeɪʃn,9,8,1
+education,ˌeʤʊˈkeɪʃn,9,8,1
 today,təˈdeɪ,5,5,0
 type,taɪp,4,4,0
 buy,baɪ,3,3,0
@@ -347,7 +347,7 @@ bad,bæd,3,3,0
 remember,rɪˈmembə,8,7,1
 research,"rɪˈsɜ:tʃ, ˈri:sɜ:tʃ",8,6,2
 minute,"ˈmɪnɪt, maɪˈnju:t",6,5,1
-actually,ˈæktʃuəli,8,8,0
+actually,ˈæktʃʊəli,8,8,0
 subject,"ˈsʌbdʒɪkt, ˈsʌbdʒekt",7,8,-1
 britain,ˈbrɪtn,7,5,2
 speak,spi:k,5,4,1
@@ -372,7 +372,7 @@ class,klɑ:s,5,4,1
 moment,ˈməʊmənt,6,7,-1
 decide,dɪˈsaɪd,6,6,0
 win,wɪn,3,3,0
-church,ʧɜ:ʧ,6,3,3
+church,tʃɜ:tʃ,6,5,1
 girl,gɜ:l,4,3,1
 until,ənˈtɪl,5,5,0
 major,ˈmeɪʤə,5,5,0
@@ -392,7 +392,7 @@ paper,ˈpeɪpə,5,5,0
 themselves,ðəmˈselvz,10,8,2
 therefore,ˈðeəfɔ:,9,5,4
 understand,ˌʌndəˈstænd,10,9,1
-century,ˈsenʧəri,7,7,0
+century,ˈsentʃəri,7,8,-1
 england,ˈɪŋglənd,7,7,0
 section,ˈsekʃn,7,5,2
 south,saʊθ,5,4,1
@@ -408,7 +408,7 @@ building,ˈbɪldɪŋ,8,6,2
 likely,ˈlaɪkli,6,6,0
 team,ti:m,4,3,1
 among,əˈmʌŋ,5,4,1
-reach,ri:ʧ,5,3,2
+reach,ri:tʃ,5,4,1
 open,ˈəʊpən,4,5,-1
 sense,sens,5,4,1
 death,deθ,5,3,2
@@ -487,7 +487,7 @@ material,məˈtɪəriəl,8,9,-1
 manager,ˈmænɪʤə,7,6,1
 ten,ten,3,3,0
 care,keə,4,3,1
-situation,ˌsɪtʃuˈeɪʃn,9,9,0
+situation,ˌsɪtʃʊˈeɪʃn,9,9,0
 record,"ˈrekɔ:d, rɪˈkɔ:d",6,5,1
 european,ˌjʊərəˈpi:ən,8,9,-1
 yesterday,"ˈjestədeɪ, ˈjestədi",9,8,1
@@ -657,7 +657,7 @@ fine,faɪn,4,4,0
 doctor,ˈdɒktə,6,5,1
 performance,pəˈfɔ:məns,11,8,3
 june,dʒu:n,4,4,0
-population,ˌpɒpjuˈleɪʃn,10,10,0
+population,ˌpɒpjʊˈleɪʃn,10,10,0
 response,rɪˈspɒns,8,7,1
 pressure,ˈpreʃə,8,5,3
 wrong,rɒŋ,5,3,2
@@ -706,7 +706,7 @@ refer,rɪˈfɜ:,5,4,1
 station,ˈsteɪʃn,7,6,1
 attention,əˈtenʃn,9,6,3
 choice,tʃɔɪs,6,5,1
-individual,ˌɪndɪˈvɪdʒuəl,10,11,-1
+individual,ˌɪndɪˈvɪdʒʊəl,10,11,-1
 film,fɪlm,4,4,0
 income,"ˈɪnkʌm, ˈɪnkəm",6,5,1
 step,step,4,4,0
@@ -798,7 +798,7 @@ serious,ˈsɪəriəs,7,7,0
 previous,ˈpri:viəs,8,7,1
 floor,flɔ:,5,3,2
 suffer,ˈsʌfə,6,4,2
-argument,ˈɑ:ɡjumənt,8,8,0
+argument,ˈɑ:ɡjʊmənt,8,8,0
 myself,maɪˈself,6,7,-1
 significant,sɪgˈnɪfɪkənt,11,11,0
 responsibility,rɪˌspɒnsəˈbɪləti,14,14,0
@@ -810,7 +810,7 @@ chairman,ˈtʃeəmən,8,7,1
 brother,ˈbrʌðə,7,5,2
 outside,ˌaʊtˈsaɪd,7,7,0
 element,ˈelɪmənt,7,7,0
-July,dʒuˈlaɪ,4,6,-2
+July,dʒʊˈlaɪ,4,6,-2
 forget,fəˈɡet,6,5,1
 avoid,əˈvɔɪd,5,5,0
 quickly,ˈkwɪkli,7,6,1
@@ -833,7 +833,7 @@ aspect,ˈæspekt,6,6,0
 generally,ˈdʒenrəli,9,8,1
 treat,tri:t,5,4,1
 throughout,θru:ˈaʊt,10,6,4
-united,juˈnaɪtɪd,6,8,-2
+united,jʊˈnaɪtɪd,6,8,-2
 industrial,ɪnˈdʌstriəl,10,10,0
 customer,ˈkʌstəmə,8,7,1
 institution,ˌɪnstɪˈtju:ʃn,11,10,1
@@ -943,7 +943,7 @@ beyond,bɪˈjɒnd,6,6,0
 heavy,ˈhevi,5,4,1
 advantage,ədˈvɑ:ntɪdʒ,9,9,0
 culture,ˈkʌltʃə,7,6,1
-january,ˈdʒænjuəri,7,9,-2
+january,ˈdʒænjʊəri,7,9,-2
 push,pʊʃ,4,3,1
 competition,ˌkɒmpəˈtɪʃn,11,9,2
 parliament,ˈpɑ:ləmənt,10,8,2
