@@ -116,9 +116,10 @@ def level_1():
         correct = int(request.form.get('correct_point', 0))
         incorrect = int(request.form.get('incorrect_point', 0))
 
-        user.correct_1 += int(correct)
-        user.incorrect_1 += int(incorrect)
-        db.session.commit()
+        if user:
+            user.correct_1 += int(correct)
+            user.incorrect_1 += int(incorrect)
+            db.session.commit()
 
 
 
@@ -154,9 +155,10 @@ def level_2():
         correct = int(request.form.get('correct_point', 0))
         incorrect = int(request.form.get('incorrect_point', 0))
 
-        user.correct_2 += int(correct)
-        user.incorrect_2 += int(incorrect)
-        db.session.commit()
+        if user:
+            user.correct_2 += int(correct)
+            user.incorrect_2 += int(incorrect)
+            db.session.commit()
 
     return render_template('level_2.html',
                            sound_dict_vowels=sound_dict_vowels,
