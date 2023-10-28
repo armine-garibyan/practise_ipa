@@ -7,6 +7,7 @@ from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 import os
 import pandas as pd
+from version import __version__
 from werkzeug.security import generate_password_hash, check_password_hash
 
 load_dotenv()
@@ -67,7 +68,7 @@ def levels():
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    return render_template("about.html", version=__version__)
 
 # split words by level of difficulty
 phon_br = pd.read_csv("phon_br.csv", names=['word', 'transcription'], sep=";")
