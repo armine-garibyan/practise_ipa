@@ -44,9 +44,9 @@
                 <button class="general-small" id="nextWord" type="button">Show the next word</button>&nbsp;&nbsp;&nbsp;
                 <input id="showWord" disabled value="">
             </div>
-            <div style="padding-top: 2em;">
+            <div class="answers" style="padding-top: 2em;">
                 <b>Transcribe the word using IPA symbols:</b>&nbsp;&nbsp;&nbsp;
-                <input id="answer" value="">
+                <input id="answer" value="" style="width: 180px;">
             </div>&nbsp;&nbsp;
             <div class="same-line">
                 <button class="general-small" id="reset" type="button" style="border-radius: 12px;">Reset the answer</button> &nbsp;&nbsp;&nbsp;
@@ -164,8 +164,21 @@
             empty = document.createElement("input");
             empty.setAttribute("id", "answer");
             empty.setAttribute("value", "");
+            empty.style.width = "180px";
 
             document.getElementById("answer").replaceWith(empty);
+
+            // remove the correct answer from previous word if present
+            var correct = document.getElementById("correct");
+
+            if (correct) {
+                correct.parentNode.removeChild(correct);
+            }
+
+            // reset the style of the show-correct button to default
+                var showCorrectButton = document.getElementById("show_correct");
+                showCorrectButton.style.backgroundColor = "white";
+                showCorrectButton.style.color = "black";
 
             // reset current answer
             current_value = "";
@@ -175,14 +188,32 @@
             feedback.textContent = "";
         });
 
+        // Listen for the input event to update the stored cursor position
+        var input_answer = document.getElementById("answer");
+        var storedCursorPosition;
+
+        input_answer.addEventListener('keyup', e => {
+          console.log('Caret at: ', e.target.selectionStart)
+        })
+
 
         // add IPA symbol to the current answer
-        $(document).on('click', '.symbol', function(){
+        $(document).on('click', '.symbol', function(event){
             // extract current answer
             var buttonText = $(this).text();
             var input_answer = document.getElementById("answer");
-            var current_value = input_answer.value;
-            current_value += buttonText;
+
+            // if no position, append at the end
+            if (storedCursorPosition === null || storedCursorPosition === undefined) {
+                console.log('undefined');
+                var current_value = input_answer.value;
+                current_value += buttonText;
+                input_answer.value = current_value;
+            } else {
+                var current_value = input_answer.value;
+                var new_value = current_value.substring(0, storedCursorPosition) + buttonText + current_value.substring(storedCursorPosition);
+                input_answer.value = new_value;
+            }
 
             // display the current answer
             old_answer = document.getElementById("answer");
@@ -193,6 +224,7 @@
             new_answer.style.border = "2px solid cadetblue";
             new_answer.style.height = "35px";
             new_answer.style.fontSize = "18px";
+            new_answer.style.width = "180px";
 
             old_answer.replaceWith(new_answer);
         });
@@ -284,15 +316,31 @@
 
         // show correct answer
         $(document).on('click', '#show_correct', function(){
-            answer = document.getElementById("answer");
-            if (transcriptions[randomIndex].includes(", ")) {
-                var variants = transcriptions[randomIndex].split(", ");
-                answer.setAttribute("value", variants[0]);
-                current_value = variants[0];
-            } else {
-                answer.style.textAlign = "center";
-                answer.setAttribute("value", transcriptions[randomIndex]);
-                current_value = transcriptions[randomIndex];
+
+            // check if not present
+            var correct = document.getElementById("correct");
+
+            if (!correct) {
+                var answersDiv = document.querySelector(".answers");
+
+                // colour the button
+                var showCorrectButton = document.getElementById("show_correct");
+                showCorrectButton.style.backgroundColor = "#EFB33F";
+                showCorrectButton.style.color = "white";
+
+                correct = document.createElement("input");
+                correct.setAttribute("id", "correct");
+                correct.setAttribute("value", transcriptions[randomIndex]);
+                correct.style.textAlign = "center";
+                correct.style.border = "2px solid cadetblue";
+                correct.style.backgroundColor = "#8ed682";
+                correct.style.height = "35px";
+                correct.style.fontSize = "18px";
+                correct.style.width = "180px";
+
+                // play with the width of the new input field to account for long double answers
+
+                answersDiv.appendChild(correct);
             }
         });
     </script>
