@@ -1,4 +1,4 @@
-__version__ = "1.1.1"
+__version__ = "1.2.0"
 
 # CHANGES
-# fixed a mistake in the meta tag in the layout tempalte
+# added audio plays of user's own transcriptions

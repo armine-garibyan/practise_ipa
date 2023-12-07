@@ -47,6 +47,7 @@
             <div class="answers" style="padding-top: 2em;">
                 <b>Transcribe the word using IPA symbols:</b>&nbsp;&nbsp;&nbsp;
                 <input id="answer" value="" style="width: 180px;">
+                <button class="play_button"><i class="fa-solid fa-play fa-lg"></i></button>
             </div>&nbsp;&nbsp;
             <div class="same-line">
                 <button class="general-small" id="reset" type="button" style="border-radius: 12px;">Reset the answer</button> &nbsp;&nbsp;&nbsp;
@@ -233,6 +234,33 @@
             new_answer.style.width = "180px";
 
             old_answer.replaceWith(new_answer);
+        });
+
+        // play audio upon button click
+        $(document).on('click', '.play_button', function(event){
+            var input_answer = document.getElementById("answer");
+            var ipa_string = input_answer.value;
+
+            // Send AJAX request to synthesize text
+            $.ajax({
+                type: 'POST',
+                url: '/level_1',
+                data: {ipa_string: ipa_string},
+                xhrFields: {
+                    // Set the response type to blob for binary data
+                    responseType: 'blob'
+                },
+                success: function(response) {
+                    // Handle the response from the server
+                    var audio = new Audio();
+                    audio.src = URL.createObjectURL(response);
+                    audio.play();
+                },
+                error: function(error) {
+                    // Handle any errors that occur during the AJAX request
+                    console.error('Error:', error);
+                }
+            });
         });
 
         // check current answer

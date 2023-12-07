@@ -1,10 +1,12 @@
+import base64
+import boto3
 from datetime import datetime
-
 from dotenv import load_dotenv
-from flask import Flask, flash, g, redirect, render_template, request, url_for, session
+from flask import Flask, flash, g, make_response, redirect, render_template, request, url_for, send_file, session
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user, UserMixin
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+from io import BytesIO
 import os
 import pandas as pd
 from version import __version__
@@ -19,6 +21,8 @@ app.debug = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
+access_secret_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 db = SQLAlchemy(app)
 
@@ -117,12 +121,39 @@ def level_1():
         correct = int(request.form.get('correct_point', 0))
         incorrect = int(request.form.get('incorrect_point', 0))
 
+        ipa = request.form.get("ipa_string", "")
+
         if user:
             user.correct_1 += int(correct)
             user.incorrect_1 += int(incorrect)
             db.session.commit()
 
+        # synthesize speech
+        polly_client = boto3.Session(
+            aws_access_key_id=access_key_id,
+            aws_secret_access_key=access_secret_key,
+            region_name='us-east-1'
+        ).client('polly')
 
+        response = polly_client.synthesize_speech(
+            VoiceId='Brian',
+            OutputFormat='mp3',
+            Text='<phoneme alphabet="ipa" ph="{}"></phoneme>'.format(ipa),
+            TextType="ssml",
+            Engine='neural'
+        )
+
+        # Use BytesIO to stream audio data
+        buffer = BytesIO(response['AudioStream'].read())
+
+        # Create a Flask response with the audio data
+        response = make_response(send_file(buffer, mimetype='audio/mp3'))
+
+        # Set the appropriate headers to handle streaming audio
+        response.headers['Content-Disposition'] = 'inline'
+        response.headers['Content-Type'] = 'audio/mp3'
+
+        return response
 
     return render_template('level_1.html',
                            sound_dict_vowels=sound_dict_vowels,
@@ -156,10 +187,39 @@ def level_2():
         correct = int(request.form.get('correct_point', 0))
         incorrect = int(request.form.get('incorrect_point', 0))
 
+        ipa = request.form.get("ipa_string", "")
+
         if user:
             user.correct_2 += int(correct)
             user.incorrect_2 += int(incorrect)
             db.session.commit()
+
+        # synthesize speech
+        polly_client = boto3.Session(
+            aws_access_key_id=access_key_id,
+            aws_secret_access_key=access_secret_key,
+            region_name='us-east-1'
+        ).client('polly')
+
+        response = polly_client.synthesize_speech(
+            VoiceId='Brian',
+            OutputFormat='mp3',
+            Text='<phoneme alphabet="ipa" ph="{}"></phoneme>'.format(ipa),
+            TextType="ssml",
+            Engine='neural'
+        )
+
+        # Use BytesIO to stream audio data
+        buffer = BytesIO(response['AudioStream'].read())
+
+        # Create a Flask response with the audio data
+        response = make_response(send_file(buffer, mimetype='audio/mp3'))
+
+        # Set the appropriate headers to handle streaming audio
+        response.headers['Content-Disposition'] = 'inline'
+        response.headers['Content-Type'] = 'audio/mp3'
+
+        return response
 
     return render_template('level_2.html',
                            sound_dict_vowels=sound_dict_vowels,
